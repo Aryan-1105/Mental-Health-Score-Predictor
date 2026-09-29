@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Mental Health Predictor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <main class="container">
+    <header class="hero">
+      <div class="badge">🧠 AI Powered</div>
+      <h1>Student Mental Health <span>Predictor</span></h1>
+      <p>Fill in the details below and get an estimated mental health score.</p>
+    </header>
+
+    <div class="layout">
+      <!-- FORM -->
+      <form id="predictForm" class="card" novalidate>
+        <h2>Student Details</h2>
+
+        <div class="grid">
+          <div class="field">
+            <label for="age">Age</label>
+            <input type="number" id="age" min="10" max="100" placeholder="e.g. 21" required />
+          </div>
+
+          <div class="field">
+            <label for="gender">Gender</label>
+            <select id="gender" required>
+              <option value="" selected disabled>Select</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="country">Country</label>
+            <select id="country" required>
+              <option value="" selected disabled>Select</option>
+              <option>India</option>
+              <option>USA</option>
+              <option>Canada</option>
+              <option>Australia</option>
+              <option>UK</option>
+              <option>Germany</option>
+              <option>Mexico</option>
+              <option>Turkey</option>
+              <option>France</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="academic_level">Academic Level</label>
+            <select id="academic_level" required>
+              <option value="" selected disabled>Select</option>
+              <option>Undergraduate</option>
+              <option>Graduate</option>
+              <option>High School</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="most_used_platform">Most Used Platform</label>
+            <select id="most_used_platform" required>
+              <option value="" selected disabled>Select</option>
+              <option>Instagram</option>
+              <option>TikTok</option>
+              <option>Facebook</option>
+              <option>LinkedIn</option>
+              <option>YouTube</option>
+              <option>Twitter</option>
+              <option>Snapchat</option>
+              <option>WhatsApp</option>
+              <option>LINE</option>
+              <option>VKontakte</option>
+              <option>KakaoTalk</option>
+              <option>WeChat</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="purpose_of_use">Purpose of Use</label>
+            <select id="purpose_of_use" required>
+              <option value="" selected disabled>Select</option>
+              <option>Entertainment</option>
+              <option>Education</option>
+              <option>Networking</option>
+              <option>News</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="daily_unlocks">Daily Phone Unlocks</label>
+            <input type="number" id="daily_unlocks" min="0" placeholder="e.g. 60" required />
+          </div>
+        </div>
+
+        <div class="sliders">
+          <div class="slider-field">
+            <div class="slider-top">
+              <label for="avg_daily_usage_hours">📱 Daily Social Media Usage</label>
+              <span class="value" id="v_usage">0 h</span>
+            </div>
+            <input type="range" id="avg_daily_usage_hours" min="0" max="24" step="0.5" value="0" />
+          </div>
+
+          <div class="slider-field">
+            <div class="slider-top">
+              <label for="study_hours">📚 Study Hours</label>
+              <span class="value" id="v_study">0 h</span>
+            </div>
+            <input type="range" id="study_hours" min="0" max="24" step="0.5" value="0" />
+          </div>
+
+          <div class="slider-field">
+            <div class="slider-top">
+              <label for="physical_activity_hours">🏃 Physical Activity</label>
+              <span class="value" id="v_activity">0 h</span>
+            </div>
+            <input type="range" id="physical_activity_hours" min="0" max="24" step="0.5" value="0" />
+          </div>
+
+          <div class="slider-field">
+            <div class="slider-top">
+              <label for="sleep_hours_per_night">😴 Sleep per Night</label>
+              <span class="value" id="v_sleep">0 h</span>
+            </div>
+            <input type="range" id="sleep_hours_per_night" min="0" max="24" step="0.5" value="0" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Stress Level</label>
+          <div class="pills" id="stressPills">
+            <input type="radio" name="stress" id="s_low" value="Low" />
+            <label for="s_low">Low</label>
+            <input type="radio" name="stress" id="s_med" value="Medium" />
+            <label for="s_med">Medium</label>
+            <input type="radio" name="stress" id="s_high" value="High" />
+            <label for="s_high">High</label>
+            <input type="radio" name="stress" id="s_vhigh" value="Very High" />
+            <label for="s_vhigh">Very High</label>
+          </div>
+        </div>
+
+        <button type="submit" id="submitBtn" class="btn">
+          <span class="btn-text">Predict Score</span>
+          <span class="spinner"></span>
+        </button>
+        <p class="error" id="errorMsg"></p>
+      </form>
+
+      <!-- RESULT -->
+      <aside class="card result" id="resultCard">
+        <h2>Your Result</h2>
+
+        <div class="gauge">
+          <svg viewBox="0 0 200 200">
+            <defs>
+              <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#7c5cff" />
+                <stop offset="100%" stop-color="#22d3ee" />
+              </linearGradient>
+            </defs>
+            <circle class="ring-bg" cx="100" cy="100" r="85" />
+            <circle class="ring" id="ring" cx="100" cy="100" r="85" />
+          </svg>
+          <div class="gauge-center">
+            <div class="score" id="scoreNum">--</div>
+            <div class="out-of">out of 10</div>
+          </div>
+        </div>
+
+        <div class="verdict" id="verdict">Submit the form to see your prediction</div>
+        <p class="note">
+          This is a model-based estimate for educational purposes and not a medical diagnosis.
+          If you're struggling, please talk to a trusted person or a qualified professional.
+        </p>
+      </aside>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

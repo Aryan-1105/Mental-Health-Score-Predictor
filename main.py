@@ -151,7 +151,7 @@ class PredictionResponse(BaseModel):
 
 @app.get("/")
 def greet():
-    return {"message": "Welcome To My FastAPI Project"}
+    return {"message": "Welcome To Student Health Score Prediction Service"}
 
 
 # ============================================================
